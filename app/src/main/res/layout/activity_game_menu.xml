@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:orientation="vertical"
+    tools:context="tulv.vocab.view.GameMenuActivity">
+
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+
+
+    <TableLayout
+        android:layout_gravity="center"
+        android:stretchColumns="3"
+        android:gravity="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_column="0">
+                <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/game"
+                    android:scaleType="fitXY"
+                    android:onClick="choseGame"
+                    android:id="@+id/btGame1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trò chơi 1" android:layout_gravity="center"
+                    android:id="@+id/textView3" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_column="1">
+                <ImageButton
+                    android:scaleType="fitXY"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/game"
+                    android:onClick="choseGame"
+                android:id="@+id/btGame2" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trò chơi 2"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@+id/textView34" /></LinearLayout>
+            <LinearLayout
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_column="2">
+                <ImageButton
+                    android:scaleType="fitXY"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/game"
+                    android:onClick="choseGame"
+                    android:id="@+id/btGame3" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trò chơi 3"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:id="@+id/textView334" /></LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginRight="5dip"
+            />
+
+        <TextView
+            android:id="@+id/tvEnglish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:layout_alignTop="@+id/list_image"
+            android:layout_alignLeft="@+id/tvVietnamese"
+            android:layout_alignStart="@+id/tvVietnamese"
+            />
+
+        <TextView
+            android:id="@+id/tvVietnamese"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvEnglish"
+            android:layout_marginTop="1dip"
+            android:layout_toRightOf="@+id/list_image"
+            android:textColor="#343434"
+            android:text="Số từ vựng: 12"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/btSpeak"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/soundicon"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.Game1Activity"
+    android:weightSum="1">
+
+    <TableLayout
+        android:stretchColumns="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TableRow
+
+            android:layout_width="wrap_content"
+            android:layout_height="108dp"
+            android:layout_gravity="center"
+            android:background="@color/colorGreenToolBar">
+            <ImageButton  android:id="@+id/btBack"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:layout_column="0"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/iconback"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Điểm: 0"
+                android:layout_column="1"
+                android:id="@+id/tvScore"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center_vertical"
+                android:gravity="center" />
+
+
+
+            <TextView
+                android:textColor="@color/colorWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvTime"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center" />
+
+        </TableRow>
+
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceLarge"
+
+            android:id="@+id/tvVietnamese"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:layout_column="14" />
+
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceLarge"
+
+            android:id="@+id/tvEnglish"
+            android:textColor="@color/colorGreenToolBar"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp" />
+
+    </TableLayout>
+
+    <GridView
+        android:id="@+id/grAnphabet"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="411dp"
+        android:numColumns="4"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:stretchMode="columnWidth">
+
+    </GridView>
+
+</LinearLayout>

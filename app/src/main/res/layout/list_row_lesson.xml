@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_marginRight="5dip"
+
+            />
+
+        <TextView
+            android:id="@+id/tvLessonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignLeft="@+id/tvLessonNumber"
+            android:layout_alignStart="@+id/tvLessonNumber"
+            android:layout_alignTop="@+id/list_image"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/tvLessonNumber"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLessonName"
+            android:layout_marginTop="1dip"
+            android:layout_toRightOf="@+id/list_image"
+            android:textColor="#343434"
+            android:textSize="12sp" />
+
+
+
+
+
+        <ImageButton
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+          android:src="@drawable/game"
+            android:id="@+id/btGame"
+            android:onClick="gameClick"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+             />
+
+        <ImageButton
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:id="@+id/btPronoun"
+            android:onClick="pronounClick"
+            android:scaleType="fitXY"
+            android:src="@drawable/mic"
+            android:background="@android:color/transparent"
+            android:layout_centerVertical="true"
+
+            android:layout_toLeftOf="@+id/btGame"
+
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp" />
+
+    </RelativeLayout>
+</LinearLayout>
