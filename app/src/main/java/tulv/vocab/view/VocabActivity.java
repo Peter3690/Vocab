@@ -17,7 +17,6 @@ import tulv.vocab.presenter.vocab.VocabPresenter;
 import tulv.vocab.presenter.vocab.VocabPresenterImpl;
 
 public class VocabActivity extends AppCompatActivity {
-    public int PAGES = 0;
     public final static int LOOPS = 1000;
 
     public VocabAdapter adapter;
@@ -45,14 +44,13 @@ public class VocabActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
         vocabPresenter = new VocabPresenterImpl(this);
         arrayList = vocabPresenter.getListByLessonID(id);
-        PAGES = arrayList.size();
         pager = (ViewPager) findViewById(R.id.viewPagerVocab);
 
-        adapter = new VocabAdapter(VocabActivity.this, VocabActivity.this.getSupportFragmentManager(), arrayList, 12, 6);
+        adapter = new VocabAdapter(VocabActivity.this, VocabActivity.this.getSupportFragmentManager(), arrayList, 6);
         pager.setAdapter(adapter);
         pager.setPageTransformer(false, adapter);
 
-        pager.setCurrentItem(PAGES / 2);
+        pager.setCurrentItem(0);
         pager.setOffscreenPageLimit(1);
         pager.setPageMargin(10);
     }
@@ -67,7 +65,7 @@ public class VocabActivity extends AppCompatActivity {
         Intent intent = null;
         switch (id) {
             case R.id.about:
-                intent = new Intent(getApplicationContext(), About.class);
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
                 break;
             case R.id.remind:
                 intent = new Intent(getApplicationContext(), RemindActivity.class);

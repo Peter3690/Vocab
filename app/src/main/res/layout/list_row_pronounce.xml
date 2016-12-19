@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
     android:padding="5dp">
-
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
-        android:padding="10dp">
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        >
 
         <TextView
             android:id="@+id/tvSTT"
@@ -60,27 +61,26 @@
 
         <ImageButton
             android:id="@+id/btSound"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
             android:src="@drawable/soundicon"
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/tvCheck" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:id="@+id/btCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvEnglish"
-            android:layout_alignStart="@+id/tvEnglish"
-            android:layout_below="@+id/tvSTT"
-android:textSize="10dp"
+            android:textSize="10dp"
             android:onClick="promptSpeechInput"
             android:text="Kiểm tra giọng"
-            android:textColor="#ff000d" />
+            android:textColor="#ff000d"
+            android:layout_below="@+id/tvSTT"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/tvCheck"

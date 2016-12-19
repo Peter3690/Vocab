@@ -38,39 +38,41 @@ public class VocabFragment extends Fragment {
         if (container == null) {
             return null;
         }
+        ViewHolder viewHolder=new ViewHolder();
+        LinearLayout l = (LinearLayout)
+                inflater.inflate(R.layout.fragment_vocab, container, false);
+        viewHolder.tvEnglish = (TextView) l.findViewById(R.id.tvEnglish);
+        viewHolder.tvVietnamese = (TextView) l.findViewById(R.id.tvVietnamese);
+        viewHolder.tvPronoun = (TextView) l.findViewById(R.id.tvPronoun);
+        viewHolder.btnSpeak = (ImageButton) l.findViewById(R.id.btSpeak);
+        viewHolder.btnRemind = (ImageButton) l.findViewById(R.id.btRemind);
+        viewHolder.ivImage = (ImageView) l.findViewById(R.id.imgVocab);
         vocabModel = new VocabModel(getContext());
         int pos = this.getArguments().getInt("pos");
-
         arrayList = new ArrayList<>();
         arrayList = getArguments().getParcelableArrayList("list");
         pos = pos % arrayList.size();
         vocab = new Vocab();
         vocab = arrayList.get(pos);
-        LinearLayout l = (LinearLayout)
-                inflater.inflate(R.layout.fragment_vocab, container, false);
-        ImageView img = (ImageView) l.findViewById(R.id.imgVocab);
 
         byte[] blod = vocab.getImage();
         ByteArrayInputStream im = new ByteArrayInputStream(blod);
-        img.setImageBitmap(BitmapFactory.decodeStream(im));
+        viewHolder.ivImage.setImageBitmap(BitmapFactory.decodeStream(im));
 
-        final TextView tvEnglish = (TextView) l.findViewById(R.id.tvEnglish);
-        TextView tvVietnamese = (TextView) l.findViewById(R.id.tvVietnamese);
-        final TextView tvPronoun = (TextView) l.findViewById(R.id.tvPronoun);
-        tvEnglish.setText(vocab.getEnglish());
-        tvVietnamese.setText(vocab.getVietnamese());
-        tvPronoun.setText(vocab.getPronoun());
-        final ImageButton bt = (ImageButton) l.findViewById(R.id.btSpeak);
-        final ImageButton bt1 = (ImageButton) l.findViewById(R.id.btRemind);
+        viewHolder.tvEnglish.setText(vocab.getEnglish());
+        viewHolder.tvVietnamese.setText(vocab.getVietnamese());
+        viewHolder.tvPronoun.setText(vocab.getPronoun());
+
         if (vocab.getRemind() == true) {
             int resID = getResources().getIdentifier("alarmclockicon", "drawable", "tulv.vocab");
-            bt1.setImageResource(resID);
+            viewHolder.btnRemind.setImageResource(resID);
         } else {
             int resID = getResources().getIdentifier("alarmclockdisabledicon", "drawable", "tulv.vocab");
-            bt1.setImageResource(resID);
+            viewHolder.btnRemind.setImageResource(resID);
         }
 
-        bt1.setOnClickListener(new View.OnClickListener() {
+        final ViewHolder finalViewHolder = viewHolder;
+        viewHolder.btnRemind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 vocabModel.updateRemind(vocab.getId());
@@ -78,17 +80,17 @@ public class VocabFragment extends Fragment {
                 boolean s = vocab.getRemind();
                 if (s == false) {
                     int resID = getResources().getIdentifier("alarmclockdisabledicon", "drawable", "tulv.vocab");
-                    bt1.setImageResource(resID);
+                    finalViewHolder.btnRemind.setImageResource(resID);
                 } else {
                     int resID = getResources().getIdentifier("alarmclockicon", "drawable", "tulv.vocab");
-                    bt1.setImageResource(resID);
+                    finalViewHolder.btnRemind.setImageResource(resID);
                 }
             }
         });
         VocabLayout root = (VocabLayout) l.findViewById(R.id.root);
         float scale = this.getArguments().getFloat("scale");
         root.setScaleBoth(scale);
-        bt.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String eng=vocab.getEnglish().replace(' ','_');
@@ -99,5 +101,13 @@ public class VocabFragment extends Fragment {
 
         });
               return l;
+    }
+    public class ViewHolder{
+        TextView tvEnglish;
+        TextView tvVietnamese;
+        TextView tvPronoun;
+        ImageView ivImage;
+        ImageButton btnRemind;
+        ImageButton btnSpeak;
     }
 }

@@ -27,18 +27,20 @@ import tulv.vocab.view.PronounciationActivity;
 public class LessonAdapter extends BaseAdapter {
     ArrayList<Lesson> arrayList;
     LessonModel lessonModel;
-    LayoutInflater inflater;
+Context context;
     // Hàm tạo của custom
     public LessonAdapter(Context context, ArrayList<Lesson> listData) {
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.arrayList = listData;
-
+this.context=context;
     }
+
     String name = "";
+
     public int getFlagResource(Context context, String name) {
         int resId = context.getResources().getIdentifier(name, "drawable", "tulv.vocab");
         return resId;
     }
+
     // Trả về số lượng phần tử được hiển thị trong listview
     @Override
     public int getCount() {
@@ -59,23 +61,26 @@ public class LessonAdapter extends BaseAdapter {
     // Hàm quan trọng nhất, hiển thị giao diện của listview
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
-
         // Lấy ra đối tượng cần hiển thị ở vị trí thứ position
         final Lesson item = arrayList.get(position);
-        // Khai báo các component
-        TextView tvLessonName, tvLessonNumber;
-        ImageView img;
+        ViewHolder viewHolder = null;
         // Khởi tạo view.
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_row_lesson, parent, false);
+            convertView= LayoutInflater.from(context).inflate(R.layout.list_row_lesson,parent,false);
+            viewHolder = new ViewHolder();
+            viewHolder.tvLessonName = (TextView) convertView.findViewById(R.id.tvLessonName);
+            viewHolder.tvLessonNumber = (TextView) convertView.findViewById(R.id.tvLessonNumber);
+            viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.list_image);
+            viewHolder.btnGame = (ImageButton) convertView.findViewById(R.id.btGame);
+            viewHolder.btnPronoun = (ImageButton) convertView.findViewById(R.id.btPronoun);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
         lessonModel = new LessonModel(convertView.getContext());
-        tvLessonName = (TextView) convertView.findViewById(R.id.tvLessonName);
-        tvLessonNumber = (TextView) convertView.findViewById(R.id.tvLessonNumber);
-        img = (ImageView) convertView.findViewById(R.id.list_image);
-        ImageButton btGame = (ImageButton) convertView.findViewById(R.id.btGame);
-        ImageButton btPronoun = (ImageButton) convertView.findViewById(R.id.btPronoun);
-        btGame.setOnClickListener(new View.OnClickListener() {
+
+        viewHolder.btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(parent.getContext(), GameMenuActivity.class);
@@ -87,7 +92,7 @@ public class LessonAdapter extends BaseAdapter {
                 parent.getContext().startActivity(intent);
             }
         });
-        btPronoun.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btnPronoun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(parent.getContext(), PronounciationActivity.class);
@@ -99,13 +104,21 @@ public class LessonAdapter extends BaseAdapter {
             }
         });
         // Set dữ liệu vào item của list view
-        tvLessonName.setText(item.getName());
+        viewHolder.tvLessonName.setText(item.getName());
        /* txtPhone.setText(item.getPhone());*/
         int count = lessonModel.countVocab(item.getId());
-        tvLessonNumber.setText("Số từ vựng là: " + count);
+        viewHolder.tvLessonNumber.setText("Số từ vựng là: " + count);
         byte[] blod = item.getImage();
         ByteArrayInputStream im = new ByteArrayInputStream(blod);
-        img.setImageBitmap(BitmapFactory.decodeStream(im));
+        viewHolder.ivImage.setImageBitmap(BitmapFactory.decodeStream(im));
         return convertView;
+    }
+
+    public class ViewHolder {
+        TextView tvLessonName;
+        TextView tvLessonNumber;
+        ImageView ivImage;
+        ImageButton btnGame;
+        ImageButton btnPronoun;
     }
 }

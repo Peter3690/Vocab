@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,9 +22,7 @@ import tulv.vocab.presenter.vocab.VocabPresenter;
 import tulv.vocab.presenter.vocab.VocabPresenterImpl;
 
 public class Game2Activity extends AppCompatActivity {
-
     VocabPresenter vocabPresenter;
-
     ArrayList<Vocab> arrayList;
 
     int location = 0;
@@ -122,6 +121,7 @@ public class Game2Activity extends AppCompatActivity {
                         speak(view.getContext(),rawID);
                     }
                 }else {
+                    Toast.makeText(Game2Activity.this, "Bạn trả lời chưa chính xác!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

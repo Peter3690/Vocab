@@ -16,39 +16,51 @@ import tulv.vocab.R;
  */
 public class Game2Adapter extends BaseAdapter {
     ArrayList<String> arrayList;
-    LayoutInflater inflater;
+Context context;
     // Hàm tạo của custom
     public Game2Adapter(Context context, ArrayList<String> arrayList) {
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.arrayList=arrayList;
+        this.arrayList = arrayList;
+        this.context=context;
     }
+
     // Trả về số lượng phần tử được hiển thị trong listview
     @Override
     public int getCount() {
         return arrayList.size();
     }
+
     // Trả về đối tượng được lấy theo vị trí
     @Override
     public Object getItem(int position) {
         return arrayList.get(position);
     }
+
     @Override
     public long getItemId(int position) {
         return 0;
     }
+
     // Hàm quan trọng nhất, hiển thị giao diện của listview
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
         // Lấy ra đối tượng cần hiển thị ở vị trí thứ position
         String s = arrayList.get(position);
-        // Khai báo các component
-        TextView tvABC;
+        ViewHolder viewHolder = null;
         // Khởi tạo view.
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.grid_item_game2, parent, false);
+            convertView= LayoutInflater.from(context).inflate(R.layout.grid_item_game2,parent,false);
+            viewHolder = new ViewHolder();
+            viewHolder.tvEnglish = (TextView) convertView.findViewById(R.id.tvABC);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        tvABC = (TextView) convertView.findViewById(R.id.tvABC);
-        tvABC.setText(s);
+        viewHolder.tvEnglish.setText(s);
         return convertView;
+    }
+
+    public class ViewHolder {
+        TextView tvEnglish;
     }
 }

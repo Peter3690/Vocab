@@ -29,6 +29,7 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/icon_entrance"
 
+            android:layout_marginBottom="10dp"
             android:onClick="IntoClick"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

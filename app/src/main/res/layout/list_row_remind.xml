@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="5dp"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="vertical">
+>
+    <!--android:descendantFocusability="blocksDescendants"-->
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    android:gravity="center_vertical"
+    android:background="#fff"
+    android:padding="10dp"
+    android:orientation="horizontal">
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:padding="10dp">
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
 
-        <ImageView
-            android:id="@+id/list_image"
-            android:layout_width="50dip"
-            android:layout_height="50dip"
-            android:layout_marginRight="5dip"
-            />
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/list_image"
+        android:layout_toEndOf="@+id/list_image">
 
         <TextView
             android:id="@+id/tvEnglish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="abc"
             android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:typeface="sans"
-            android:layout_alignTop="@+id/list_image"
-            android:layout_alignLeft="@+id/tvVietnamese"
-            android:layout_alignStart="@+id/tvVietnamese"
-            />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvVietnamese"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvEnglish"
-            android:layout_marginTop="1dip"
-            android:layout_toRightOf="@+id/list_image"
-            android:textColor="#343434"
             android:text="Số từ vựng: 12"
-            android:textSize="14sp" />
+            android:textColor="#343434"
+            android:textSize="16sp" />
+    </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btSpeak"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@android:color/transparent"
-            android:padding="12dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/soundicon"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+
+
+    <ImageButton
+        android:id="@+id/btSpeak"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+                 android:src="@drawable/soundicon"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:src="@drawable/soundicon"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        />
+
+</RelativeLayout>
 </LinearLayout>

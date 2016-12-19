@@ -38,15 +38,12 @@ public class Game1Activity extends AppCompatActivity {
     Random rd;
     int score = 0;
     int highScore = 0;
-
-
     MediaPlayer mediaPlayer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game1);
-
+        getWidget();
         final CountDownTimer count = new CountDownTimer(90000, 1000) {
             public void onTick(long millisUntilFinished) {
 
@@ -64,7 +61,6 @@ public class Game1Activity extends AppCompatActivity {
                     } else {
                         tvTime.setText("0:" + (millisUntilFinished / 1000));
                     }
-
                 }
             }
 

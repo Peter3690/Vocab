@@ -20,45 +20,44 @@ import tulv.vocab.layout.VocabLayout;
  */
 public class VocabAdapter extends FragmentPagerAdapter implements ViewPager.PageTransformer {
     public final static float BIG_SCALE = 1.0f;
-    public final static float SMALL_SCALE = 0.8f;
+    public final static float SMALL_SCALE = 0.6f;
     public final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
-    VocabFragment vocabFragment=new VocabFragment();
+
+    VocabFragment vocabFragment;
+
     private Context context;
     private FragmentManager fm;
     private float scale;
     ArrayList<Vocab> arrayList;
-    int PAGES;
     int FIRST_PAGE;
 
-    public VocabAdapter(Context context, FragmentManager fm, ArrayList<Vocab> arrayList, int PAGES, int FIRST_PAGE) {
+    public VocabAdapter(Context context, FragmentManager fm, ArrayList<Vocab> arrayList, int FIRST_PAGE) {
         super(fm);
         this.fm = fm;
         this.context = context;
         this.arrayList = arrayList;
-        this.PAGES = PAGES;
         this.FIRST_PAGE = FIRST_PAGE;
     }
 
     @Override
     public Fragment getItem(int position) {
-        if (position == this.FIRST_PAGE)
+    /*    if (position == this.FIRST_PAGE)
             scale = BIG_SCALE;
         else
-            scale = SMALL_SCALE;
+            scale = SMALL_SCALE;*/
         final Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("list",arrayList);
-        bundle.putInt("pos",position);
-        bundle.putFloat("scale",scale);
-        final VocabFragment fragment = new VocabFragment();
-        fragment.setArguments(bundle);
+        bundle.putParcelableArrayList("list", arrayList);
+        bundle.putInt("pos", position);
+        bundle.putFloat("scale", scale);
+        vocabFragment = new VocabFragment();
+        vocabFragment.setArguments(bundle);
 
-        return fragment;
+        return vocabFragment;
     }
 
     @Override
-    public int getCount()
-    {
-        return this.PAGES * 1000;
+    public int getCount() {
+        return arrayList.size();
     }
 
     @Override

@@ -71,20 +71,8 @@ android:orientation="vertical"
                 android:padding="10dp"
                 android:orientation="vertical"
                 android:layout_column="2">
-                <ImageButton
-                    android:scaleType="fitXY"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/game"
-                    android:onClick="choseGame"
-                    android:id="@+id/btGame3" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Trò chơi 3"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:id="@+id/textView334" /></LinearLayout>
+
+            </LinearLayout>
         </TableRow>
     </TableLayout>
 

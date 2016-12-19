@@ -53,7 +53,7 @@ public class GameMenuActivity extends AppCompatActivity {
         Intent intent = null;
         switch (id) {
             case R.id.about:
-                intent = new Intent(getApplicationContext(), About.class);
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
                 break;
             case R.id.remind:
                 intent = new Intent(getApplicationContext(), RemindActivity.class);

@@ -6,57 +6,70 @@
     tools:context=".view.Game2Activity"
     android:weightSum="1">
 
-    <TableLayout
+ <!--   <TableLayout
         android:shrinkColumns="3"
         android:stretchColumns="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
-
-        <TableRow
+-->
+       <!-- <TableRow
 
             android:layout_width="wrap_content"
             android:layout_height="108dp"
             android:layout_gravity="center"
-            android:background="@color/colorGreenToolBar">
-            <ImageButton  android:id="@+id/btBack"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:background="@android:color/transparent"
-                android:padding="12dp"
-                android:layout_column="0"
-                android:layout_marginRight="20dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/iconback"/>
+            android:background="@color/colorGreenToolBar">-->
+            <RelativeLayout
+                android:background="@color/colorGreenToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Điểm: 0"
-                android:layout_column="1"
-                android:id="@+id/tvScore"
-                android:layout_weight="1"
-                android:textColor="@color/colorWhite"
-                android:layout_gravity="center_vertical"
-                android:gravity="center" />
+                <ImageButton  android:id="@+id/btBack"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@android:color/transparent"
+                    android:padding="12dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/iconback"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Điểm: 0"
+                    android:id="@+id/tvScore"
+                    android:textColor="@color/colorWhite"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
 
 
 
-            <TextView
-                android:textColor="@color/colorWhite"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/tvTime"
-                android:text="ds"
-                android:layout_column="2"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:gravity="center" />
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/tvTime"
+                    android:text="1:20"
 
+
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:layout_alignTop="@+id/tvScore"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp" />
+            </RelativeLayout>
+
+<!--
         </TableRow>
-    </TableLayout>
+    </TableLayout>-->
 
 
     <RelativeLayout

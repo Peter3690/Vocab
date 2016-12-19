@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ import tulv.vocab.model.LessonModel;
 public class RemindAdapter extends BaseAdapter {
     ArrayList<Vocab> arrayList;
     LessonModel lessonModel;
-    LayoutInflater inflater;
     MediaPlayer mediaPlayer;
+    Context context;
     public RemindAdapter(Context context, ArrayList<Vocab> listData) {
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.arrayList = listData;
+        this.context=context;
     }
 
     @Override
@@ -49,29 +50,45 @@ public class RemindAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
         final Vocab item = arrayList.get(position);
+        ViewHolder viewHolder;
         TextView tvEnglish, tvVietnamese;
         ImageView img;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_row_remind, parent, false);
+            convertView= LayoutInflater.from(context).inflate(R.layout.list_row_remind,parent,false);
+            viewHolder=new ViewHolder();
+            viewHolder.tvEnglish = (TextView) convertView.findViewById(R.id.tvEnglish);
+            viewHolder.tvVietnamese = (TextView) convertView.findViewById(R.id.tvVietnamese);
+            viewHolder.ivImage = (ImageView) convertView.findViewById(R.id.list_image);
+            viewHolder.ibSound=(ImageButton)convertView.findViewById(R.id.btSpeak);
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder= (ViewHolder) convertView.getTag();
         }
-        tvEnglish = (TextView) convertView.findViewById(R.id.tvEnglish);
-        tvVietnamese = (TextView) convertView.findViewById(R.id.tvVietnamese);
-        img = (ImageView) convertView.findViewById(R.id.list_image);
-        tvEnglish.setText(item.getEnglish());
-        tvVietnamese.setText(item.getVietnamese());
-        ImageButton bt=(ImageButton)convertView.findViewById(R.id.btSpeak);
-        bt.setOnClickListener(new View.OnClickListener() {
+
+        viewHolder.tvEnglish.setText(item.getEnglish());
+        viewHolder.tvVietnamese.setText(item.getVietnamese());
+        viewHolder.ibSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String eng=item.getEnglish().replace(' ','_');
-                int resID = v.getResources().getIdentifier(eng, "raw", "tulv.vocab");
-                mediaPlayer=MediaPlayer.create(v.getContext(), resID);
-                mediaPlayer.start();
+                try {
+                    String eng=item.getEnglish().replace(' ','_');
+                    int resID = v.getResources().getIdentifier(eng, "raw", "tulv.vocab");
+                    mediaPlayer=MediaPlayer.create(v.getContext(), resID);
+                    mediaPlayer.start();
+                }catch (Exception e){
+                    Toast.makeText(v.getContext(), "Không có âm thanh", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         byte[] blod=item.getImage();
         ByteArrayInputStream im=new ByteArrayInputStream(blod);
-        img.setImageBitmap(BitmapFactory.decodeStream(im));
+        viewHolder.ivImage.setImageBitmap(BitmapFactory.decodeStream(im));
         return convertView;
+    }
+    public class ViewHolder{
+        TextView tvEnglish;
+        TextView tvVietnamese;
+        ImageButton ibSound;
+        ImageView ivImage;
     }
 }

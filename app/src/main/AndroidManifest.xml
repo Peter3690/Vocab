@@ -24,7 +24,9 @@
             -->
         </activity>
         <activity android:name=".view.VocabActivity" />
-        <activity android:name=".view.About" />
+        <activity android:name=".view.AboutActivity">
+
+        </activity>
         <activity android:name=".view.RemindActivity" />
         <activity android:name=".view.Game2Activity" />
         <activity android:name=".view.GameMenuActivity" />

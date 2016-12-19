@@ -1,15 +1,14 @@
 package tulv.vocab.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.webkit.WebView;
 
 import tulv.vocab.R;
 
-public class About extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +21,9 @@ public class About extends AppCompatActivity {
         getSupportActionBar().setTitle("Thông tin ứng dụng");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        WebView webView=(WebView)findViewById(R.id.wv);
+        webView.loadUrl("file:///android_asset/mypage.html");
 
-        Intent intent = getIntent();
-        String msg = intent.getStringExtra("content");
-        Toast.makeText(About.this, ""+ msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -36,4 +34,7 @@ public class About extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
+

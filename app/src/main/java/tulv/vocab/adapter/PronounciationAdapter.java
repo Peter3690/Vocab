@@ -32,17 +32,12 @@ public class PronounciationAdapter extends BaseAdapter {
     private final int REQ_CODE_SPEECH_INPUT = 100;
     ArrayList<Vocab> arrayList;
     LessonModel lessonModel;
-    LayoutInflater inflater;
     MediaPlayer mediaPlayer;
     Context context;
     ReadWriteFile readWriteFile;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     // Hàm tạo của custom
     public PronounciationAdapter(Context context, ArrayList<Vocab> listData) {
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.arrayList = listData;
         this.context = context;
         this.readWriteFile=new ReadWriteFile(context);
@@ -69,23 +64,28 @@ public class PronounciationAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
         // Lấy ra đối tượng cần hiển thị ở vị trí thứ position
         final Vocab item = arrayList.get(position);
-        // Khai báo các component
-        TextView tvEnglish, tvPronoun, tvCheck, tvSTT;
-        ImageButton btSpeak;
-        Button btCheck;
+        ViewHolder viewHolder = null;
         // Khởi tạo view.
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_row_pronounce, parent, false);
+            convertView= LayoutInflater.from(context).inflate(R.layout.list_row_pronounce,parent,false);
+            viewHolder=new ViewHolder();
+
+            viewHolder.tvNumber = (TextView) convertView.findViewById(R.id.tvSTT);
+            viewHolder.tvEnglish = (TextView) convertView.findViewById(R.id.tvEnglish);
+            viewHolder.tvPronoun = (TextView) convertView.findViewById(R.id.tvPronoun);
+            viewHolder.tvCheck = (TextView) convertView.findViewById(R.id.tvCheck);
+            viewHolder.btnSpeak = (ImageButton) convertView.findViewById(R.id.btSound);
+            viewHolder.btnCheck = (Button) convertView.findViewById(R.id.btCheck);
+
+            convertView.setTag(viewHolder);
+        }
+        else{
+            viewHolder= (ViewHolder) convertView.getTag();
         }
         lessonModel = new LessonModel(convertView.getContext());
         mediaPlayer = new MediaPlayer();
-        tvSTT = (TextView) convertView.findViewById(R.id.tvSTT);
-        tvEnglish = (TextView) convertView.findViewById(R.id.tvEnglish);
-        tvPronoun = (TextView) convertView.findViewById(R.id.tvPronoun);
-        tvCheck = (TextView) convertView.findViewById(R.id.tvCheck);
-        btSpeak = (ImageButton) convertView.findViewById(R.id.btSound);
-        btCheck = (Button) convertView.findViewById(R.id.btCheck);
-        btCheck.setOnClickListener(new View.OnClickListener() {
+
+        viewHolder.btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 id=item.getId();
@@ -93,22 +93,35 @@ public class PronounciationAdapter extends BaseAdapter {
                 promptSpeechInput((Activity) parent.getContext());
             }
         });
-        btSpeak.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String eng = item.getEnglish().replace(' ', '_');
-                int resID = parent.getResources().getIdentifier(eng, "raw", "tulv.vocab");
-                mediaPlayer = MediaPlayer.create(parent.getContext(), resID);
-                mediaPlayer.start();
+                try {
+                    String eng = item.getEnglish().replace(' ', '_');
+                    int resID = parent.getResources().getIdentifier(eng, "raw", "tulv.vocab");
+                    mediaPlayer = MediaPlayer.create(parent.getContext(), resID);
+                    mediaPlayer.start();
+                }catch (Exception e){
+                    Toast.makeText(view.getContext(), "Không có âm thanh", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         // Set dữ liệu vào item của list view
-        tvSTT.setText(position + 1 + ".");
-        tvEnglish.setText(item.getEnglish());
-        tvPronoun.setText(item.getPronoun());
+        viewHolder.tvNumber.setText(position + 1 + ".");
+        viewHolder.tvEnglish.setText(item.getEnglish());
+        viewHolder.tvPronoun.setText(item.getPronoun());
         String result=readWriteFile.readData(item.getId(),"pronounciation.txt");
-        tvCheck.setText(result);
+        viewHolder.tvCheck.setText(result);
         return convertView;
+    }
+
+    public class ViewHolder{
+        TextView tvNumber;
+        TextView tvEnglish;
+        TextView tvPronoun;
+        TextView tvCheck;
+        ImageButton btnSpeak;
+        Button btnCheck;
     }
 
     private void promptSpeechInput(Activity activity) {
@@ -117,12 +130,12 @@ public class PronounciationAdapter extends BaseAdapter {
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                "noi di");
+                "Đọc");
         try {
             activity.startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
         } catch (ActivityNotFoundException a) {
             Toast.makeText(activity,
-                    "khong ho tro",
+                    "Vui lòng kiểm tra kết nối Internet!",
                     Toast.LENGTH_SHORT).show();
         }
     }
